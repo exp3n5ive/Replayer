@@ -1,0 +1,457 @@
+body {
+    display: flex; /* Use flexbox for overall layout */
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    overflow: hidden; /* Prevent body scroll, children will handle it */
+    height: 100vh; /* Ensure body takes full viewport height */
+}
+
+body.dark-mode {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+/* --- Scrollbar Styles (适用于 WebKit 浏览器) --- */
+/* Light mode scrollbar styles */
+::-webkit-scrollbar {
+    width: 12px; /* For vertical scrollbars */
+    height: 12px; /* For horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+    background: #e0e0e0; /* Lighter background for the track */
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b0b0b0; /* Lighter thumb color */
+    border-radius: 6px;
+    border: 3px solid #e0e0e0; /* Border to make thumb appear smaller inside track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #909090; /* Slightly darker on hover */
+}
+
+/* Dark mode scrollbar styles (overrides light mode styles) */
+body.dark-mode ::-webkit-scrollbar {
+    width: 12px; /* For vertical scrollbars */
+    height: 12px; /* For horizontal scrollbars */
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #444; /* Darker background for the track */
+    border-radius: 6px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #666; /* Darker thumb color */
+    border-radius: 6px;
+    border: 3px solid #444; /* Border to make thumb appear smaller inside track */
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #888; /* Slightly lighter on hover */
+}
+
+body.dark-mode ::-webkit-scrollbar-corner {
+    background: transparent;
+}
+/* --- End Scrollbar Styles --- */
+
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px; /* Fixed width for the sidebar */
+    background-color: #e0e0e0;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+    overflow-y: auto; /* Enable vertical scrolling for the sidebar content */
+    padding-bottom: 10px; /* Add some padding at the bottom */
+    height: 100%; /* Make sidebar take full height of body */
+}
+
+body.dark-mode .sidebar {
+    background-color: #2b2b2b;
+    border-right: 1px solid #444;
+}
+
+.sidebar h3 {
+    text-align: center;
+    margin: 10px 0;
+    padding: 0 10px;
+    flex-shrink: 0; /* Prevent header from shrinking */
+    color: #555;
+}
+
+body.dark-mode .sidebar h3 {
+    color: #bbb;
+}
+
+/* Search Input Styles */
+.search-container {
+    padding: 5px 10px 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #e0e0e0;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+body.dark-mode .search-container {
+    border-bottom: 1px solid #444;
+    background-color: #2b2b2b;
+}
+
+#historySearchInput {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+body.dark-mode #historySearchInput {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #f0f0f0;
+}
+
+#requestHistoryList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Allow list to take available space */
+}
+
+#requestHistoryList li {
+    padding: 8px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-size: 0.85em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.2s ease;
+}
+
+body.dark-mode #requestHistoryList li {
+    border-bottom: 1px solid #3a3a3a;
+}
+
+#requestHistoryList li:hover {
+    background-color: #d0d0d0;
+}
+
+body.dark-mode #requestHistoryList li:hover {
+    background-color: #383838;
+}
+
+#requestHistoryList li.selected {
+    background-color: #c0c0c0;
+    font-weight: bold;
+}
+
+body.dark-mode #requestHistoryList li.selected {
+    background-color: #4a4a4a;
+}
+
+#requestHistoryList li.placeholder {
+    font-style: italic;
+    color: #888;
+    cursor: default;
+    background-color: transparent;
+}
+
+body.dark-mode #requestHistoryList li.placeholder {
+    color: #999;
+}
+
+
+/* Main content area next to sidebar */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Main content takes remaining space */
+    height: 100%; /* Make main-content take full height of body */
+    overflow: hidden; /* Important: Prevents content from overflowing this container if its children have scrollbars */
+}
+
+.button-container {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #eee;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+body.dark-mode .button-container {
+    background-color: #444;
+    border-bottom: 1px solid #555;
+}
+
+.button-container button {
+    padding: 8px 15px;
+    cursor: pointer;
+    background-color: #f7f7f7;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #e0e0e0;
+    border-color: #bbb;
+}
+
+body.dark-mode .button-container button {
+    background-color: #222;
+    color: #fff;
+    border-color: #444;
+}
+
+body.dark-mode .button-container button:hover {
+    background-color: #3a3a3a;
+    border-color: #555;
+}
+
+.content-container {
+    display: flex;
+    flex-grow: 1; /* Allow it to grow and fill remaining vertical space */
+    overflow: hidden; /* Essential: This allows its children to scroll instead of this container */
+}
+
+.request-pane, .response-pane {
+    flex: 1; /* Each takes equal width */
+    padding: 10px;
+    height: 100%; /* Make sure panes fill the height of content-container */
+    overflow: hidden; /* Prevents outer scroll, children (div, iframe, pre) will scroll */
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Essential for absolute positioning of overlay elements */
+}
+
+body.dark-mode .request-pane, body.dark-mode .response-pane {
+    border-right: 1px solid #555;
+}
+
+.request-pane:last-child, .response-pane:last-child {
+    border-right: none;
+}
+
+.request-pane h3, .response-pane h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    flex-shrink: 0; /* Prevent headers from shrinking */
+}
+
+/* Styles for overlay elements (textarea and pre code) */
+.request-overlay {
+    position: absolute; /* Position both textarea and pre code absolutely */
+    top: 50px; /* Adjust based on h3 and padding, to align below "Request" title */
+    left: 10px; /* Align with request-pane padding */
+    right: 10px; /* Align with request-pane padding */
+    bottom: 10px; /* Align with request-pane padding */
+    padding: 10px;
+    overflow: auto; /* Enable scrolling for the content itself */
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    background-color: #f7f7f7;
+    color: #333;
+    border: 1px solid #eee;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body.dark-mode .request-overlay {
+    background-color: #222;
+    color: #f0f0f0;
+    border-color: #444;
+}
+
+/* Initially hide the textarea */
+#requestEditor {
+    display: none;
+    resize: none; /* Disable manual resizing for textarea */
+}
+
+/* Styles for the response display iframe */
+#responseFrame {
+    flex-grow: 1; /* Allow iframe to take available space */
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: white;
+    display: none; /* Hidden by default */
+    box-sizing: border-box; /* Include border in height */
+}
+
+body.dark-mode #responseFrame {
+    border-color: #555;
+    background-color: #222;
+}
+
+/* General style for response display pre code block */
+pre {
+    margin: 0;
+    flex-grow: 1; /* Allow pre to take available space within its parent pane */
+}
+
+pre code {
+    display: block;
+    padding: 10px;
+    overflow: auto; /* Ensure code blocks have their own scrollbars */
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    background-color: #f7f7f7;
+    color: #333;
+    border: 1px solid #eee;
+    height: 100%; /* Ensure it fills parent's available space */
+    box-sizing: border-box;
+}
+
+body.dark-mode pre code {
+    background-color: #222;
+    color: #f0f0f0;
+    border-color: #444;
+}
+
+
+/* Prism.js Dark Theme adjustments (if using a separate dark theme for Prism) */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.token.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+/* Dark mode specific for Prism.js tokens */
+body.dark-mode .token.comment,
+body.dark-mode .token.prolog,
+body.dark-mode .token.doctype,
+body.dark-mode .token.cdata {
+    color: #777; /* Darker comments */
+}
+
+body.dark-mode .token.punctuation {
+    color: #bbb;
+}
+
+body.dark-mode .token.property,
+body.dark-mode .token.tag,
+body.dark-mode .token.boolean,
+body.dark-mode .token.number,
+body.dark-mode .token.constant,
+body.dark-mode .token.symbol,
+body.dark-mode .token.deleted {
+    color: #ff8b8b; /* Adjusted for dark mode readability */
+}
+
+body.dark-mode .token.selector,
+body.dark-mode .token.attr-name,
+body.dark-mode .token.string,
+body.dark-mode .token.char,
+body.dark-mode .token.builtin,
+body.dark-mode .token.inserted {
+    color: #98fb98; /* Adjusted for dark mode readability */
+}
+
+body.dark-mode .token.operator,
+body.dark-mode .token.entity,
+body.dark-mode .token.url,
+body.dark-mode .language-css .token.string,
+body.dark-mode .style .token.string {
+    color: #fdd835; /* Adjusted for dark mode readability */
+}
+
+body.dark-mode .token.atrule,
+body.dark-mode .token.attr-value,
+body.dark-mode .token.keyword {
+    color: #82b1ff; /* Adjusted for dark mode readability */
+}
+
+body.dark-mode .token.function,
+body.dark-mode .token.class-name {
+    color: #ffcc80; /* Adjusted for dark mode readability */
+}
+
+body.dark-mode .token.regex,
+body.dark-mode .token.important,
+body.dark-mode .token.variable {
+    color: #e0b0ff; /* Adjusted for dark mode readability */
+}

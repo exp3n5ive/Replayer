@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Replayer Panel</title>
+    <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="prism.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Network History</h3>
+        <div class="search-container">
+            <input type="text" id="historySearchInput" placeholder="Search requests...">
+        </div>
+        <ul id="requestHistoryList">
+            <li class="placeholder">No requests captured yet.</li>
+            <li class="placeholder">Refresh page or perform actions.</li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="button-container">
+            <button id="loadRequest" title="Clear/Refresh History (does not re-capture)">Clear History</button>
+            <button id="sendRequest">Send Edited Request</button>
+        </div>
+        <div class="content-container">
+            <div class="request-pane">
+                <h3>Request</h3>
+                <textarea id="requestEditor" class="request-overlay"></textarea>
+                <pre><code id="requestDisplay" class="language-http request-overlay"></code></pre>
+            </div>
+            <div class="response-pane">
+                <h3>Response</h3>
+                <iframe id="responseFrame"></iframe>
+                <pre><code id="responseDisplay" class="language-http"></code></pre>
+            </div>
+        </div>
+    </div>
+    <script src="prism.js"></script>
+    <script src="panel.js"></script>
+</body>
+</html>
